@@ -17,7 +17,7 @@ ggplot(df, aes(x=as.POSIXct(timestamp, tz="GMT"), y=systolic)) +
 
 ggplot(df, aes(x=as.POSIXct(timestamp, tz="GMT"), y=diastolic)) +
   geom_point() +
-  geom_smooth(method="lm", se=TRUE) +
+  geom_smooth(method="auto", se=TRUE) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   ggtitle('Diastolic pressure') +
   xlab('date time') +
