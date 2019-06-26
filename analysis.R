@@ -46,4 +46,13 @@ ggplot(df, aes(x=hematocrit, y=systolic)) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
   ggtitle('Systolic Pressure by Hematocrit') +
   xlab('hematocrit') +
-  ylab('systolic [mm Hg]')
+  ylab
+
+ggplot(df, aes(x=hematocrit, y=diastolic)) +
+  scale_x_reverse() +
+  geom_point() +
+  geom_smooth(method="auto", se=TRUE) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  ggtitle('Diastolic Pressure by Hematocrit') +
+  xlab('hematocrit') +
+  ylab('diastolic [mm Hg]')
