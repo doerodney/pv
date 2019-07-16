@@ -17,6 +17,24 @@ dfDaily <- df %>%
           )
 glimpse(dfDaily)
 
+dfPhleb <- df %>% filter(phlebotomy > 0) %>% 
+  group_by(date) %>%
+  summarize( systolic = mean(systolic),
+             diastolic = mean(diastolic),
+             pulse = mean(pulse),
+             dosemg = mean(dosemg))
+glimpse(dfPhleb)
+
+# Plot strip charts of blood pressure values:
+ggplot(dfPhleb, aes(x=as.POSIXct(date, tz="GMT"), y=systolic, color=dosemg)) +
+  geom_point() +
+  geom_smooth(method="auto", se=TRUE) +
+  theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
+  ggtitle('Systolic pressure by time and hydroxyurea dosage pre-phlebotomy') +
+  xlab('date time') +
+  ylab('pressure [mm Hg]') 
+
+
 # Model the systolic pressure as a function of phlebotomy, hematocrit, and dosage.
 model <- lm(systolic ~ phlebotomy + hematocrit + dosemg, data = dfDaily)
 summary(model)
