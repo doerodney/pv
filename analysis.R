@@ -48,7 +48,7 @@ ggplot(dfDaily, aes(x=as.POSIXct(date, tz="GMT"), y=systolic, color=dosemg)) +
   geom_point() +
   geom_smooth(method="auto", se=TRUE) +
   theme(axis.text.x = element_text(angle = 60, hjust = 1)) +
-  ggtitle('Systolic pressure by time and hydroxyurea dosage') +
+  ggtitle('Daily mean systolic pressure by time and hydroxyurea dosage') +
   xlab('date time') +
   ylab('pressure [mm Hg]') 
 
