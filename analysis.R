@@ -25,6 +25,16 @@ dfPhleb <- df %>% filter(phlebotomy > 0) %>%
              dosemg = mean(dosemg))
 glimpse(dfPhleb)
 
+
+dfHematocrit <- df %>% filter(hematocrit > 0) %>% 
+  group_by(date) %>%
+  summarize(hematocrit = mean(hematocrit),
+            systolic = mean(systolic),
+            diastolic = mean(diastolic),
+            pulse = mean(pulse),
+            dosemg = mean(dosemg))
+glimpse(dfHematocrit)
+
 # Plot strip charts of blood pressure values:
 ggplot(dfPhleb, aes(x=as.POSIXct(date, tz="GMT"), y=systolic, color=dosemg)) +
   geom_point() +
@@ -85,7 +95,7 @@ ggplot(df, aes(x=as.POSIXct(timestamp, tz="GMT"), y=hematocrit, color=dosemg)) +
   xlab('date time') +
   ylab('percent red cell volume of total blood volume')
 
-ggplot(df, aes(x=hematocrit, y=systolic)) +
+ggplot(dfHematocrit, aes(x=hematocrit, y=systolic)) +
   scale_x_reverse() +
   geom_point() +
   geom_smooth(method="auto", se=TRUE) +
